@@ -2,7 +2,7 @@
     validate_counters(counters::Dict{Symbol, Counter})
 
 Validates that counter names are in the allowable list. Throws an error if
-    the list is invalid.
+    the list is invalid. Returns `nothing` if valid. 
 """
 function validate_counters(counters::Dict{Symbol, Counter})
     invalid_names = Symbol[]
