@@ -1,5 +1,11 @@
 # Overview
 
+[![](https://img.shields.io/badge/docs-dev-blue.svg)](https://numoptim.github.io/OptimizationModels.jl/dev/)
+[![Runtests](https://github.com/numoptim/OptimizationModels.jl/actions/workflows/runtests.yml/badge.svg)](https://github.com/numoptim/OptimizationModels.jl/actions/workflows/runtests.yml)
+[![Code Style: Blue](https://img.shields.io/badge/code%20style-blue-4495d1.svg)](https://github.com/invenia/BlueStyle)
+
+
+
 `OptimizationModels.jl` is a research-tier software package for the Julia
 language that provides a uniform interface for modeling optimization problems
 arising in data science.
