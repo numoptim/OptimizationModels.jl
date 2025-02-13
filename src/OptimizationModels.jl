@@ -19,6 +19,7 @@ include("counters/validate_counters.jl")
 export Counter
 export reset_block!, reset_batch!, reset! 
 export increment_block!, increment_batch!, increment! 
+export validate_counters
 
 ##################################
 # Optimizaiton Problems 
