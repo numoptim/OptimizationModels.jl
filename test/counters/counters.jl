@@ -10,6 +10,14 @@ using Test, OptimizationModels
     @test_throws ArgumentError Counter(1, 1, -0.1, 0.0)
     @test_throws ArgumentError Counter(1, 1, 0.0, -0.1)
 
+    # Constructor defaults 
+    let cntr = Counter()
+        @test cntr.batch_equivalent == 0.0
+        @test cntr.block_equivalent == 0.0
+        @test cntr.batch_total == 1.0
+        @test cntr.block_total == 1.0
+    end
+
     # Constructor resets
     let cntr = Counter(10, 5, 0.5, 2.0)
         # Verify start values
