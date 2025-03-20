@@ -2,6 +2,7 @@
 
 [![](https://img.shields.io/badge/docs-dev-blue.svg)](https://numoptim.github.io/OptimizationModels.jl/dev/)
 [![Runtests](https://github.com/numoptim/OptimizationModels.jl/actions/workflows/runtests.yml/badge.svg)](https://github.com/numoptim/OptimizationModels.jl/actions/workflows/runtests.yml)
+[![codecov](https://codecov.io/gh/numoptim/OptimizationModels.jl/graph/badge.svg?token=P8JF7XJ1WC)](https://codecov.io/gh/numoptim/OptimizationModels.jl)
 [![Code Style: Blue](https://img.shields.io/badge/code%20style-blue-4495d1.svg)](https://github.com/invenia/BlueStyle)
 
 
