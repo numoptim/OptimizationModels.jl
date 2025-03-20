@@ -1,3 +1,4 @@
 counters/counters.jl
 counters/print_counters.jl
+counters/validate_counters.jl
 validate.jl
