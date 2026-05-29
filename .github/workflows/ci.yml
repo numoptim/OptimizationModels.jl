@@ -115,5 +115,5 @@ jobs:
             using Pkg
             Pkg.add("LocalRegistry")
             using LocalRegistry
-            register(registry="git@github.com:numoptim/NumOptimRegistry.git", push=true)
+            register(registry="git@github.com:numoptim/NumOptimRegistry.git", push=true, allow_package_dirty=true)
           '
