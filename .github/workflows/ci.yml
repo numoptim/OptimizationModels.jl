@@ -101,7 +101,7 @@ jobs:
           GITHUB_REF: refs/tags/v${{ steps.version.outputs.new_version }}
         run: julia --project=docs/ docs/make.jl
 
-      - uses: webfactory/ssh-agent@v0.9.0
+      - uses: webfactory/ssh-agent@v0.10.0
         with:
           ssh-private-key: ${{ secrets.REGISTRY_SSH_KEY }}
 
