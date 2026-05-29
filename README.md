@@ -1,7 +1,7 @@
 # Overview
 
-[![](https://img.shields.io/badge/docs-dev-blue.svg)](https://numoptim.github.io/OptimizationModels.jl/dev/)
-[![Runtests](https://github.com/numoptim/OptimizationModels.jl/actions/workflows/runtests.yml/badge.svg)](https://github.com/numoptim/OptimizationModels.jl/actions/workflows/runtests.yml)
+[![](https://img.shields.io/badge/docs-stable-blue.svg)](https://numoptim.github.io/OptimizationModels.jl/stable/)
+[![CI](https://github.com/numoptim/OptimizationModels.jl/actions/workflows/ci.yml/badge.svg)](https://github.com/numoptim/OptimizationModels.jl/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/numoptim/OptimizationModels.jl/graph/badge.svg?token=P8JF7XJ1WC)](https://codecov.io/gh/numoptim/OptimizationModels.jl)
 [![Code Style: Blue](https://img.shields.io/badge/code%20style-blue-4495d1.svg)](https://github.com/invenia/BlueStyle)
 
@@ -18,15 +18,21 @@ especially those with constraints.
 
 ## Installation
 
-This package is not yet registered in Julia's package official registry.
+This package is registered in [NumOptimRegistry](https://github.com/numoptim/NumOptimRegistry).
+Add the registry once per Julia installation, then install the package normally:
 
-To install it, you can write in the REPL:
-
+```julia
+] registry add https://github.com/numoptim/NumOptimRegistry
+] add OptimizationModels
 ```
+
+Alternatively, install directly from the repository URL without adding the registry:
+
+```julia
 ] add https://github.com/numoptim/OptimizationModels.jl
 ```
 
-It is also possible to clone the repository into a local directory. 
+It is also possible to clone the repository into a local directory.
 In that case, refer to [Julia Pkg instructions](
     https://pkgdocs.julialang.org/v1/environments/#Using-someone-else's-project
 ).
