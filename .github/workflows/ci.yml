@@ -3,10 +3,12 @@ name: CI
 on:
   pull_request:
     types: [opened, synchronize, reopened, closed]
+  push:
+    branches: [main]
 
 jobs:
   test:
-    if: github.event.action != 'closed'
+    if: github.event_name == 'pull_request' && github.event.action != 'closed'
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -34,8 +36,8 @@ jobs:
           slug: numoptim/OptimizationModels.jl
           fail_ci_if_error: false
 
-  docs:
-    if: github.event.action != 'closed'
+  test-docs:
+    if: github.event_name == 'pull_request' && github.event.action != 'closed'
     runs-on: ubuntu-latest
     permissions:
       actions: write
@@ -54,7 +56,7 @@ jobs:
         run: julia --project=docs/ docs/make.jl
 
   release:
-    if: github.event.pull_request.merged == true
+    if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -85,22 +87,6 @@ jobs:
           git tag "v${{ steps.version.outputs.new_version }}"
           git push origin "v${{ steps.version.outputs.new_version }}"
 
-      - uses: julia-actions/setup-julia@v2
-        with:
-          version: '1'
-      - uses: julia-actions/cache@v3
-
-      - name: Install docs dependencies
-        run: julia --project=docs/ -e 'using Pkg; Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate()'
-
-      - name: Deploy docs
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DOCUMENTER_KEY: ${{ secrets.DOCUMENTER_KEY }}
-          GITHUB_EVENT_NAME: push
-          GITHUB_REF: refs/tags/v${{ steps.version.outputs.new_version }}
-        run: julia --project=docs/ docs/make.jl
-
       - uses: webfactory/ssh-agent@v0.10.0
         with:
           ssh-private-key: ${{ secrets.REGISTRY_SSH_KEY }}
@@ -117,3 +103,23 @@ jobs:
             using LocalRegistry
             register(registry="git@github.com:numoptim/NumOptimRegistry.git", push=true, allow_package_dirty=true)
           '
+
+  deploy-docs:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+      - uses: julia-actions/setup-julia@v2
+        with:
+          version: '1'
+      - uses: julia-actions/cache@v3
+      - name: Install dependencies
+        run: julia --project=docs/ -e 'using Pkg; Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate()'
+      - name: Deploy docs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DOCUMENTER_KEY: ${{ secrets.DOCUMENTER_KEY }}
+        run: julia --project=docs/ docs/make.jl
